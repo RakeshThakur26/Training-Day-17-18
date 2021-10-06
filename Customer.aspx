@@ -38,7 +38,11 @@
                 </tr>
                 
                 <tr>
-                    <td> <asp:Button ID="CustomerSubmit" runat="server" Text="Submit" BorderStyle="Solid" ToolTip="Submit" OnClick="CustomerSubmit_Click"/></td>
+                    <td></td>
+                    <td> <asp:Button ID="CustomerSubmit" runat="server" Text="Submit" BorderStyle="Solid" ToolTip="Submit" OnClick="CustomerSubmit_Click"/>
+                        <asp:Button ID="Update" runat="server" Text="Update" BorderStyle="Solid" OnClick="Update_Click" />
+                        <asp:Button ID="Reset" runat="server" Text="Reset" BorderStyle="Solid" />
+                    </td>
                 </tr>
 
                 
@@ -46,7 +50,25 @@
         </div>
          <div>
         
-            <asp:GridView ID="gvCustomerDetails" runat="server"></asp:GridView>
+            <asp:GridView ID="gvCustomerDetails" runat="server" AutoGenerateColumns="False" OnRowCommand="gvCustomerDetails_RowCommand" OnRowDeleting="gvCustomerDetails_RowDeleting" OnRowEditing="gvCustomerDetails_RowEditing" >
+                <Columns>
+                    <asp:BoundField DataField="customer_id" HeaderText="Customer Id" />
+                    <asp:BoundField DataField="cust_name" HeaderText="Customer Name" />
+                    <asp:BoundField DataField="city" HeaderText="City" />
+                    <asp:BoundField DataField="grade" HeaderText="Grade" />
+                    <asp:BoundField DataField="salesman_id" HeaderText="Salesman Id" />
+                    <asp:TemplateField HeaderText="Edit">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="Edit" runat="server" CommandName="Edit" CommandArgument='<%# Eval("customer_id") %>'>Edit</asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Delete">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="Delete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("customer_id") %>'>Delete</asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+             </asp:GridView>
         </div>
 
     </form>

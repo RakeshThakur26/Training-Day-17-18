@@ -38,11 +38,35 @@
                 </tr>
 
                  <tr>
-                    <td> <asp:Button ID="OrdersSubmit" runat="server" Text="Submit" BorderStyle="Solid" ToolTip="Submit" OnClick="OrdersSubmit_Click" style="height: 35px"/></td>
+                     <td></td>
+                    <td> <asp:Button ID="OrdersSubmit" runat="server" Text="Submit" BorderStyle="Solid" ToolTip="Submit" OnClick="OrdersSubmit_Click" style="height: 35px"/>
+                         <asp:Button ID="Update" runat="server" Text="Update" BorderStyle="Solid" OnClick="Update_Click" />
+                         <asp:Button ID="Reset" runat="server" Text="Reset" BorderStyle="Solid" />
+
+                    </td>
                 </tr>
                 
             </table>
         </div>
+        <asp:GridView ID="gvOrderDetails" runat="server" AutoGenerateColumns="False" OnRowCommand="gvOrderDetails_RowCommand" OnRowDeleting="gvOrderDetails_RowDeleting" OnRowEditing="gvOrderDetails_RowEditing" >
+            <Columns>
+                <asp:BoundField DataField="order_no" HeaderText="Order number" />
+                <asp:BoundField DataField="purch_amt" HeaderText="Purchase Amount" />
+                <asp:BoundField DataField="order_date" HeaderText="Date" />
+                <asp:BoundField DataField="customer_id" HeaderText="Customer Id" />
+                <asp:BoundField DataField="salesman_id" HeaderText="Salesman Id" />
+                <asp:TemplateField HeaderText="Edit">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="Edit" runat="server"  CommandName="Edit" CommandArgument='<%# Eval("order_no") %>'>Edit</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Delete" >
+                    <ItemTemplate>
+                        <asp:LinkButton ID="Delete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("order_no") %>'>Delete</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
     </form>
 </body>
 </html>
